@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIGALAB — À propos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --red:       #E32428;
+      --red-dark:  #B81D21;
+      --red-light: #FDEAEA;
+      --black:     #111111;
+      --charcoal:  #1E1E1E;
+      --gray-800:  #2D2D2D;
+      --gray-600:  #6B6B6B;
+      --gray-400:  #9E9E9E;
+      --gray-200:  #E5E5E5;
+      --gray-100:  #F4F4F4;
+      --white:     #FFFFFF;
+      --font:      'Montserrat', sans-serif;
+      --max-w:     1200px;
+      --px:        clamp(20px, 5vw, 80px);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--charcoal); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px); }
+    section { padding: 100px 0; }
+
+    /* ─── OVERLINE ─── */
+    .overline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    .overline::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--red);
+      display: block;
+      flex-shrink: 0;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: 3px;
+      transition: all 0.22s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      box-shadow: 0 6px 24px rgba(227,36,40,0.28);
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid var(--gray-200);
+    }
+    .btn-outline-dark:hover { border-color: var(--charcoal); }
+    .btn svg { width: 14px; height: 14px; transition: transform 0.2s ease; flex-shrink: 0; }
+    .btn:hover svg { transform: translateX(3px); }
+
+    /* ═══════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      height: 68px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar .container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    .nav-logo-mark {
+      width: 34px; height: 34px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark span {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo-sub {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: -2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      padding: 6px 14px;
+      border-radius: 3px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--red); font-weight: 700; }
+    .nav-cta { display: flex; gap: 10px; align-items: center; }
+
+    /* ═══════════════════════════════════
+       PAGE HERO (inner pages)
+    ═══════════════════════════════════ */
+    .page-hero {
+      background: var(--charcoal);
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-glow {
+      position: absolute;
+      top: -80px; right: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(227,36,40,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .breadcrumb span { color: rgba(255,255,255,0.7); }
+    .breadcrumb-sep { width: 12px; height: 1px; background: rgba(255,255,255,0.25); flex-shrink: 0; }
+    .page-title {
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .page-title em { color: var(--red); font-style: normal; }
+    .page-subtitle {
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════
+       HISTOIRE
+    ═══════════════════════════════════ */
+    .histoire-section {
+      padding: 100px 0;
+    }
+    .histoire-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .histoire-content h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: var(--black);
+    }
+    .histoire-content h2 em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .histoire-content p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .histoire-content p:last-of-type { margin-bottom: 32px; }
+    .histoire-photo {
+      position: relative;
+    }
+    .histoire-photo-main {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-100);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--gray-400);
+    }
+    .histoire-photo-main svg { opacity: 0.4; }
+    .histoire-photo-main span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .histoire-photo-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--charcoal);
+      border-radius: 4px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .histoire-badge-icon {
+      width: 40px; height: 40px;
+      background: rgba(227,36,40,0.15);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+    .histoire-badge-num {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .histoire-badge-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .histoire-badge-dot {
+      width: 7px; height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════
+       MISSION + VISION
+    ═══════════════════════════════════ */
+    .mv-section {
+      background: var(--gray-100);
+      padding: 100px 0;
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .mv-card {
+      background: var(--white);
+      padding: 52px 48px;
+      position: relative;
+    }
+    .mv-card-number {
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--gray-100);
+      letter-spacing: -0.06em;
+      line-height: 1;
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      user-select: none;
+    }
+    .mv-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mv-card-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--red);
+      display: block;
+      flex-shrink: 0;
+    }
+    .mv-card h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .mv-card p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+
+    /* ═══════════════════════════════════
+       ÉQUIPE DIRIGEANTE
+    ═══════════════════════════════════ */
+    .equipe-section {
+      padding: 100px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header .overline {
+      justify-content: center;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: var(--gray-600);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .team-card {
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      transition: box-shadow 0.2s;
+    }
+    .team-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .team-photo {
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--gray-400);
+      min-height: 240px;
+      position: relative;
+    }
+    .team-photo svg { opacity: 0.3; }
+    .team-photo-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+    .team-photo-accent {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+    }
+    .team-info {
+      padding: 32px 28px;
+    }
+    .team-role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 14px;
+    }
+    .team-bio {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+    .team-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: 0.06em;
+      padding: 7px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 3px;
+      transition: border-color 0.15s;
+    }
+    .team-linkedin:hover { border-color: var(--charcoal); }
+
+    /* ═══════════════════════════════════
+       VALEURS
+    ═══════════════════════════════════ */
+    .values-section {
+      background: var(--charcoal);
+      padding: 100px 0;
+    }
+    .values-section .section-title { color: var(--white); }
+    .values-section .section-sub { color: rgba(255,255,255,0.5); }
+    .values-section .overline { color: var(--red); }
+    .values-section .overline::before { background: var(--red); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 0;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.04);
+      padding: 40px 32px;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .value-card:hover { background: rgba(255,255,255,0.07); }
+    .value-number {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    .value-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .value-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════
+       CERTIFICATIONS
+    ═══════════════════════════════════ */
+    .certifs-section {
+      padding: 100px 0;
+      background: var(--gray-100);
+    }
+    .certifs-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .certifs-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .certifs-header p {
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+    .certifs-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .certif-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: box-shadow 0.2s;
+    }
+    .certif-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .certif-logo-placeholder {
+      width: 60px; height: 60px;
+      background: var(--gray-100);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gray-400);
+      letter-spacing: 0.08em;
+    }
+    .certif-card-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .certif-card-desc {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════
+       CTA SECTION
+    ═══════════════════════════════════ */
+    .cta-section {
+      background: var(--red);
+      padding: 80px 0;
+    }
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .cta-text-block {}
+    .cta-overline {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 10px;
+    }
+    .cta-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .cta-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .btn-cta-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--red);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .btn-cta-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-cta-outline {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      padding: 14px 28px;
+      border-radius: 3px;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      transition: all 0.2s;
+    }
+    .btn-cta-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    footer {
+      background: var(--charcoal);
+      padding: 72px 0 0;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+    }
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 18px;
+    }
+    .footer-logo-mark {
+      width: 34px; height: 34px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-logo-mark span {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--white);
+    }
+    .footer-logo-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .footer-social { display: flex; gap: 8px; }
+    .social-btn {
+      width: 32px; height: 32px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.15s;
+    }
+    .social-btn:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+    .footer-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 18px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copyright {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-xerus {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.15s;
+    }
+    .footer-xerus:hover { color: rgba(255,255,255,0.7); }
+    .footer-xerus strong { font-weight: 700; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-up-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-up-4 { animation-delay: 0.4s; opacity: 0; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .histoire-inner { grid-template-columns: 1fr; gap: 48px; }
+      .histoire-photo { display: none; }
+      .mv-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-card { grid-template-columns: 1fr; }
+      .team-photo { min-height: 160px; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .certifs-grid { grid-template-columns: repeat(3, 1fr); }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .certifs-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <header class="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-mark"><span>G</span></div>
+        <div>
+          <div class="nav-logo-name">GIGALAB</div>
+          <span class="nav-logo-sub">Diagnostic</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="gigalab_home.html">Accueil</a></li>
+          <li><a href="gigalab_about.html" class="active">À propos</a></li>
+          <li><a href="gigalab_solutions.html">Solutions</a></li>
+          <li><a href="gigalab_manufacturing.html">Manufacturing</a></li>
+          <li><a href="gigalab_distribution.html">Distribution</a></li>
+          <li><a href="gigalab_actualites.html">Actualités</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a href="gigalab_contact.html" class="btn btn-outline-dark">Contact</a>
+        <a href="gigalab_support.html" class="btn btn-primary">Support
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ PAGE HERO ═══════════════════ -->
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-glow"></div>
+    <div class="page-hero-inner">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="gigalab_home.html">Accueil</a>
+          <div class="breadcrumb-sep"></div>
+          <span>À propos</span>
+        </div>
+        <h1 class="page-title fade-up fade-up-1">À <em>propos.</em></h1>
+        <p class="page-subtitle fade-up fade-up-2">
+          Premiers tests antigéniques salivaires <em style="font-style:italic;color:rgba(255,255,255,0.75)">made in Africa</em>. De la R&amp;D à l'industrialisation — GIGALAB maîtrise l'ensemble de la chaîne.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ NOTRE HISTOIRE ═══════════════════ -->
+  <section class="histoire-section">
+    <div class="container">
+      <div class="histoire-inner">
+        <div class="histoire-content fade-up fade-up-1">
+          <div class="overline">Notre histoire</div>
+          <h2>L'innovation,<br>fabriquée <em>ici.</em></h2>
+          <p>
+            Fondée à Casablanca, GIGALAB s'est imposée comme le premier fabricant africain de tests diagnostiques rapides — avec une maîtrise complète de la chaîne, de la recherche & développement jusqu'à la production industrielle.
+          </p>
+          <p>
+            Premiers tests antigéniques salivaires <em>made in Africa</em>. De la R&amp;D à l'industrialisation, GIGALAB maîtrise l'ensemble de la chaîne — et distribue les meilleures technologies médicales mondiales.
+          </p>
+          <a href="#" class="btn btn-primary">
+            Découvrir nos solutions
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div class="histoire-photo fade-up fade-up-2">
+          <div class="histoire-photo-main">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="4" y="16" width="40" height="28" rx="2"/>
+              <path d="M16 16V10a8 8 0 0116 0v6"/>
+              <circle cx="24" cy="30" r="4"/>
+            </svg>
+            <span>Photo du siège / équipe GIGALAB</span>
+          </div>
+          <div class="histoire-photo-badge">
+            <div class="histoire-badge-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="histoire-badge-num">1<span style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.5)">er</span></div>
+              <div class="histoire-badge-label">Fabricant africain</div>
+            </div>
+            <div class="histoire-badge-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MISSION + VISION ═══════════════════ -->
+  <section class="mv-section">
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-card">
+          <div class="mv-card-number">01</div>
+          <div class="mv-card-label">Notre mission</div>
+          <h3>Rendre le diagnostic fiable,<br>accessible et local.</h3>
+          <p>Rendre le diagnostic fiable, accessible et fabriqué localement — pour les laboratoires, hôpitaux et industriels du Maroc et d'Afrique.</p>
+        </div>
+        <div class="mv-card">
+          <div class="mv-card-number">02</div>
+          <div class="mv-card-label">Notre vision</div>
+          <h3>Leader africain du<br>diagnostic biologique.</h3>
+          <p>Devenir le leader africain du diagnostic biologique — en combinant fabrication locale, distribution multi-marques et excellence technologique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ÉQUIPE DIRIGEANTE ═══════════════════ -->
+  <section class="equipe-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="overline">Les personnes derrière la vision</div>
+        <h2 class="section-title">Notre équipe dirigeante.</h2>
+        <p class="section-sub">Une équipe combinant expertise scientifique, vision industrielle et ambition africaine.</p>
+      </div>
+      <div class="team-grid">
+
+        <!-- PDG -->
+        <div class="team-card">
+          <div class="team-photo">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0118 0"/>
+            </svg>
+            <div class="team-photo-label">Photo</div>
+            <div class="team-photo-accent"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-role">Président Directeur Général</div>
+            <div class="team-name">M. Karim Zaher</div>
+            <p class="team-bio">
+              Fondateur et PDG de GIGALAB, M. Karim Zaher porte la vision d'une industrie du diagnostic biologique entièrement ancrée en Afrique. Sous sa direction, GIGALAB a réalisé une première mondiale en produisant les premiers tests antigéniques salivaires sur le continent africain.
+            </p>
+            <a href="#" class="team-linkedin">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <!-- Directeur Technique -->
+        <div class="team-card">
+          <div class="team-photo">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0118 0"/>
+            </svg>
+            <div class="team-photo-label">Photo</div>
+            <div class="team-photo-accent"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-role">Directeur Technique</div>
+            <div class="team-name">M. Aziz Rahmani</div>
+            <p class="team-bio">
+              Garant de la qualité et de la performance industrielle, M. Rahmani transforme la vision GIGALAB en réalité opérationnelle à chaque étape de la production. Il supervise l'ensemble des processus de fabrication, de R&D et de contrôle qualité.
+            </p>
+            <a href="#" class="team-linkedin">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ VALEURS ═══════════════════ -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:56px;">
+        <div class="overline" style="justify-content:center;color:var(--red);">Ce qui nous guide</div>
+        <h2 class="section-title">Nos valeurs.</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-number">01</span>
+          <div class="value-name">Innovation</div>
+          <p class="value-desc">Notre cellule R&D prospecte en continu les nouvelles technologies pour distinguer et intégrer les meilleures solutions disponibles.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-number">02</span>
+          <div class="value-name">Excellence</div>
+          <p class="value-desc">Les règles de l'art du métier sont notre priorité absolue. Nous nous y engageons à chaque étape, de la production à la livraison.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-number">03</span>
+          <div class="value-name">Esprit d'équipe</div>
+          <p class="value-desc">Le succès de GIGALAB repose sur le dévouement et la collaboration de l'ensemble de nos équipes. Chaque talent compte.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-number">04</span>
+          <div class="value-name">Intégrité</div>
+          <p class="value-desc">Nous agissons avec transparence et rigueur envers nos clients, nos partenaires et nos équipes. Sans compromis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CERTIFICATIONS ═══════════════════ -->
+  <section class="certifs-section">
+    <div class="container">
+      <div class="certifs-header">
+        <div class="overline" style="justify-content:center;">Qualité &amp; Conformité</div>
+        <h2>Certifié aux normes les plus exigeantes.</h2>
+        <p>Chaque produit GIGALAB répond aux standards internationaux de qualité et de sécurité.</p>
+      </div>
+      <div class="certifs-grid">
+        <div class="certif-card">
+          <div class="certif-logo-placeholder">LOGO</div>
+          <div class="certif-card-name">ISO 9001</div>
+          <div class="certif-card-desc">Management de la qualité</div>
+        </div>
+        <div class="certif-card">
+          <div class="certif-logo-placeholder">LOGO</div>
+          <div class="certif-card-name">ISO 13485</div>
+          <div class="certif-card-desc">Dispositifs médicaux</div>
+        </div>
+        <div class="certif-card">
+          <div class="certif-logo-placeholder">LOGO</div>
+          <div class="certif-card-name">CE</div>
+          <div class="certif-card-desc">Conformité aux directives européennes</div>
+        </div>
+        <div class="certif-card">
+          <div class="certif-logo-placeholder">LOGO</div>
+          <div class="certif-card-name">IMANOR</div>
+          <div class="certif-card-desc">Certification nationale marocaine</div>
+        </div>
+        <div class="certif-card">
+          <div class="certif-logo-placeholder">LOGO</div>
+          <div class="certif-card-name">MDS Maroc</div>
+          <div class="certif-card-desc">Homologation Ministère de la Santé</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CTA ═══════════════════ -->
+  <section class="cta-section">
+    <div class="container cta-inner">
+      <div class="cta-text-block">
+        <span class="cta-overline">Travaillons ensemble</span>
+        <h2 class="cta-title">Un projet ? Un besoin ?</h2>
+        <p class="cta-sub">Notre équipe commerciale et technique est disponible pour vous accompagner.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#" class="btn-cta-white">
+          Nous contacter
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+        </a>
+        <a href="#" class="btn-cta-outline">Télécharger notre catalogue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-logo">
+            <div class="footer-logo-mark"><span>G</span></div>
+            <span class="footer-logo-name">GIGALAB</span>
+          </div>
+          <p class="footer-tagline">We Move Behind Science. Fabrication locale et distribution multi-marques au service du diagnostic africain.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">in</a>
+            <a href="#" class="social-btn">fb</a>
+            <a href="#" class="social-btn">yt</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Solutions</div>
+          <nav class="footer-links">
+            <a href="#">Tests Rapides GLD</a>
+            <a href="#">Milieux de Culture</a>
+            <a href="#">Microscopes</a>
+            <a href="#">Automates &amp; Analyseurs</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-title">Entreprise</div>
+          <nav class="footer-links">
+            <a href="#">À propos</a>
+            <a href="#">Manufacturing</a>
+            <a href="#">Distribution</a>
+            <a href="#">Carrière</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-title">Ressources</div>
+          <nav class="footer-links">
+            <a href="#">Actualités</a>
+            <a href="#">Ressources techniques</a>
+            <a href="#">Support</a>
+            <a href="#">Contact</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 GIGALAB Diagnostic. Tous droits réservés.</span>
+        <a href="https://www.xerusmedia.com" target="_blank" class="footer-xerus">
+          Développé par <strong>Xerus</strong>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GIGALAB — Support Technique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:       #E32428;
+      --red-dark:  #B81D21;
+      --red-light: #FDEAEA;
+      --black:     #111111;
+      --charcoal:  #1E1E1E;
+      --gray-800:  #2D2D2D;
+      --gray-600:  #6B6B6B;
+      --gray-400:  #9E9E9E;
+      --gray-200:  #E5E5E5;
+      --gray-100:  #F4F4F4;
+      --white:     #FFFFFF;
+      --font:      'Montserrat', sans-serif;
+      --max-w:     1200px;
+      --px:        clamp(20px, 5vw, 80px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--charcoal); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px); }
+    section { padding: 100px 0; }
+
+    .overline {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+    }
+    .overline::before { content: ''; width: 20px; height: 2px; background: var(--red); display: block; flex-shrink: 0; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font); font-weight: 600; font-size: 13px;
+      letter-spacing: 0.06em; padding: 14px 28px; border-radius: 3px;
+      transition: all 0.22s ease; white-space: nowrap; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--red); color: var(--white); box-shadow: 0 6px 24px rgba(227,36,40,0.28); }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .btn-outline-dark { background: transparent; color: var(--charcoal); border: 1.5px solid var(--gray-200); }
+    .btn-outline-dark:hover { border-color: var(--charcoal); }
+    .btn svg { width: 14px; height: 14px; transition: transform 0.2s ease; flex-shrink: 0; }
+    .btn:hover svg { transform: translateX(3px); }
+
+    /* ═══════ NAVBAR ═══════ */
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); height: 68px; display: flex; align-items: center; }
+    .navbar .container { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo-mark { width: 34px; height: 34px; background: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-logo-mark span { font-size: 17px; font-weight: 900; color: var(--white); letter-spacing: -0.02em; }
+    .nav-logo-name { font-size: 17px; font-weight: 800; color: var(--black); letter-spacing: 0.04em; }
+    .nav-logo-sub { font-size: 9px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-top: -2px; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray-600); padding: 6px 14px; border-radius: 3px; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--red); font-weight: 700; }
+    .nav-cta { display: flex; gap: 10px; align-items: center; }
+
+    /* ═══════ PAGE HERO ═══════ */
+    .page-hero { background: var(--charcoal); padding: 80px 0 72px; position: relative; overflow: hidden; }
+    .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; }
+    .page-hero-glow { position: absolute; top: -80px; right: -60px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(227,36,40,0.14) 0%, transparent 65%); pointer-events: none; }
+    .page-hero-inner { position: relative; z-index: 1; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px; }
+    .breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.15s; }
+    .breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+    .breadcrumb span { color: rgba(255,255,255,0.7); }
+    .breadcrumb-sep { width: 12px; height: 1px; background: rgba(255,255,255,0.25); flex-shrink: 0; }
+    .page-title { font-size: clamp(2.8rem, 5vw, 4.4rem); font-weight: 900; color: var(--white); letter-spacing: -0.04em; line-height: 1; margin-bottom: 20px; }
+    .page-title em { color: var(--red); font-style: normal; }
+    .page-subtitle { font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.55); max-width: 520px; line-height: 1.7; margin-bottom: 40px; }
+
+    /* Hotline pill dans le hero */
+    .hero-hotline {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px; padding: 14px 20px;
+    }
+    .hotline-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+    .hotline-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; }
+    .hotline-value { font-size: 14px; font-weight: 700; color: var(--white); }
+    .hotline-hours { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+    /* ═══════ SERVICES GRID ═══════ */
+    .services-section { padding: 100px 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .service-card {
+      border: 1px solid var(--gray-200); border-radius: 4px;
+      padding: 36px 32px; transition: box-shadow 0.2s, border-color 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gray-200); transition: background 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.09); border-color: var(--gray-300); }
+    .service-card:hover::before { background: var(--red); }
+    .service-card.featured { border-color: var(--red); background: var(--red-light); }
+    .service-card.featured::before { background: var(--red); }
+
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 4px;
+      background: var(--gray-100); display: flex; align-items: center; justify-content: center;
+      color: var(--charcoal); margin-bottom: 24px;
+    }
+    .service-card.featured .service-icon { background: rgba(227,36,40,0.1); color: var(--red); }
+    .service-title { font-size: 1rem; font-weight: 800; color: var(--black); letter-spacing: -0.01em; margin-bottom: 10px; }
+    .service-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
+    .service-meta {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 18px; font-size: 11px; font-weight: 600;
+      color: var(--red); letter-spacing: 0.04em;
+    }
+
+    /* ═══════ FORMULAIRE + CONTACT ═══════ */
+    .contact-section { background: var(--gray-100); padding: 100px 0; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+    /* Formulaire */
+    .form-wrap {}
+    .form-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; letter-spacing: -0.04em; color: var(--black); margin-bottom: 8px; line-height: 1.1; }
+    .form-title em { font-style: normal; color: var(--red); }
+    .form-subtitle { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 36px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+    .form-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 7px; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; font-family: var(--font); font-size: 13px;
+      color: var(--charcoal); background: var(--white);
+      border: 1.5px solid var(--gray-200); border-radius: 3px;
+      padding: 12px 14px; transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(227,36,40,0.1); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+
+    /* Urgence toggles */
+    .urgence-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .urgence-btn {
+      font-family: var(--font); font-size: 12px; font-weight: 600;
+      padding: 9px 18px; border-radius: 3px; cursor: pointer;
+      border: 1.5px solid var(--gray-200); background: var(--white);
+      color: var(--gray-600); transition: all 0.15s; letter-spacing: 0.04em;
+    }
+    .urgence-btn:hover { border-color: var(--charcoal); color: var(--charcoal); }
+    .urgence-btn.selected-low { border-color: #22c55e; background: rgba(34,197,94,0.08); color: #16a34a; }
+    .urgence-btn.selected-med { border-color: #f59e0b; background: rgba(245,158,11,0.08); color: #d97706; }
+    .urgence-btn.selected-high { border-color: var(--red); background: rgba(227,36,40,0.08); color: var(--red); }
+
+    .form-submit { width: 100%; margin-top: 8px; justify-content: center; }
+
+    /* Bloc contact à droite */
+    .contact-aside {}
+    .contact-aside-title { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.03em; color: var(--black); margin-bottom: 24px; }
+
+    .contact-methods { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    .contact-method {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 4px; padding: 20px 20px;
+      transition: box-shadow 0.2s;
+    }
+    .contact-method:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+    .contact-method-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(227,36,40,0.08); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+    }
+    .contact-method-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 4px; }
+    .contact-method-value { font-size: 14px; font-weight: 700; color: var(--black); }
+    .contact-method-sub { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+
+    /* Équipements supportés */
+    .supported-wrap {}
+    .supported-title { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .supported-title::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+    .supported-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .supported-tag {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 3px; padding: 6px 12px;
+      font-size: 11px; font-weight: 600; color: var(--charcoal);
+    }
+
+    /* ═══════ PROCESS INTERVENTION ═══════ */
+    .process-section { padding: 100px 0; }
+    .process-header { text-align: center; margin-bottom: 64px; }
+    .process-header h2 { font-size: clamp(2rem,3.5vw,2.6rem); font-weight: 900; letter-spacing: -0.04em; color: var(--black); margin-bottom: 12px; }
+    .process-header h2 em { font-style: normal; color: var(--red); }
+    .process-header p { font-size: 14px; color: var(--gray-600); max-width: 440px; margin: 0 auto; line-height: 1.7; }
+
+    .process-steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .process-steps-row::before {
+      content: ''; position: absolute;
+      top: 26px; left: calc(12.5% + 26px); right: calc(12.5% + 26px);
+      height: 1px; background: var(--gray-200);
+    }
+    .process-step-col { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .process-step-circle {
+      width: 52px; height: 52px;
+      background: var(--white); border: 2px solid var(--gray-200);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 13px; font-weight: 800; color: var(--charcoal);
+      transition: all 0.2s;
+    }
+    .process-step-col:hover .process-step-circle { border-color: var(--red); color: var(--red); }
+    .process-step-name { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
+    .process-step-desc { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+
+    /* ═══════ CTA ═══════ */
+    .cta-section { background: var(--red); padding: 80px 0; }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .cta-overline { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 10px; }
+    .cta-title { font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 900; color: var(--white); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 10px; }
+    .cta-sub { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .cta-actions { display: flex; gap: 14px; flex-shrink: 0; }
+    .btn-cta-white { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--red); font-family: var(--font); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; padding: 14px 28px; border-radius: 3px; transition: all 0.2s; }
+    .btn-cta-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-cta-outline { display: inline-flex; align-items: center; font-family: var(--font); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; padding: 14px 28px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.35); color: var(--white); transition: all 0.2s; }
+    .btn-cta-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); }
+
+    /* ═══════ FOOTER ═══════ */
+    footer { background: var(--charcoal); padding: 72px 0 0; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 60px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 11px; margin-bottom: 18px; }
+    .footer-logo-mark { width: 34px; height: 34px; background: var(--red); display: flex; align-items: center; justify-content: center; }
+    .footer-logo-mark span { font-size: 17px; font-weight: 900; color: var(--white); }
+    .footer-logo-name { font-size: 17px; font-weight: 800; color: var(--white); letter-spacing: 0.04em; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 8px; }
+    .social-btn { width: 32px; height: 32px; border: 1.5px solid rgba(255,255,255,0.15); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); transition: all 0.15s; }
+    .social-btn:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+    .footer-col-title { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; }
+    .footer-copyright { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-xerus { font-size: 12px; color: rgba(255,255,255,0.35); transition: color 0.15s; }
+    .footer-xerus:hover { color: rgba(255,255,255,0.7); }
+    .footer-xerus strong { font-weight: 700; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-up-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
+
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .process-steps-row { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps-row::before { display: none; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .process-steps-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <header class="navbar">
+    <div class="container">
+      <a href="gigalab_home.html" class="nav-logo">
+        <div class="nav-logo-mark"><span>G</span></div>
+        <div>
+          <div class="nav-logo-name">GIGALAB</div>
+          <span class="nav-logo-sub">Diagnostic</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="gigalab_home.html">Accueil</a></li>
+          <li><a href="gigalab_about.html">À propos</a></li>
+          <li><a href="gigalab_solutions.html">Solutions</a></li>
+          <li><a href="gigalab_manufacturing.html">Manufacturing</a></li>
+          <li><a href="gigalab_distribution.html">Distribution</a></li>
+          <li><a href="gigalab_actualites.html">Actualités</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a href="gigalab_contact.html" class="btn btn-outline-dark">Contact</a>
+        <a href="gigalab_support.html" class="btn btn-primary">Support
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ PAGE HERO ═══════════════════ -->
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-glow"></div>
+    <div class="page-hero-inner">
+      <div class="container">
+        <div class="breadcrumb fade-up fade-up-1">
+          <a href="gigalab_home.html">Accueil</a>
+          <div class="breadcrumb-sep"></div>
+          <span>Support</span>
+        </div>
+        <h1 class="page-title fade-up fade-up-2"><em>Support.</em></h1>
+        <p class="page-subtitle fade-up fade-up-3">Installation, formation, maintenance. On est là.</p>
+        <div class="hero-hotline fade-up fade-up-3">
+          <div class="hotline-dot"></div>
+          <div>
+            <div class="hotline-label">Hotline technique</div>
+            <div class="hotline-value">[Numéro à compléter]</div>
+          </div>
+          <div style="width:1px;height:32px;background:rgba(255,255,255,0.1);"></div>
+          <div>
+            <div class="hotline-label">Horaires</div>
+            <div class="hotline-hours">Lun – Ven &nbsp;·&nbsp; 8h30 – 17h30</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ NOS SERVICES ═══════════════════ -->
+  <section class="services-section">
+    <div class="container">
+      <div style="margin-bottom:52px;">
+        <div class="overline">Ce que nous faisons</div>
+        <h2 style="font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-0.04em;color:var(--black);line-height:1.1;margin-bottom:12px;">Nos services<br>de <em style="font-style:normal;color:var(--red)">support.</em></h2>
+        <p style="font-size:15px;color:var(--gray-600);max-width:480px;line-height:1.7;">De l'installation initiale au suivi quotidien — une équipe technique dédiée à la disponibilité de vos équipements.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card featured">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="service-title">Hotline technique</div>
+          <div class="service-desc">Une ligne dédiée pour répondre à vos questions et vous guider en temps réel — un technicien GIGALAB toujours disponible.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Lun – Ven · 8h30 – 17h30
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="service-title">Installation &amp; Mise en service</div>
+          <div class="service-desc">Nos techniciens se déplacent sur site pour installer et configurer vos équipements selon les standards constructeur.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Qualification incluse
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="service-title">Formation utilisateur</div>
+          <div class="service-desc">Sessions de formation adaptées à votre équipe — sur site ou dans nos locaux. Protocoles, maintenance de routine et bonnes pratiques.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Sur site ou en présentiel
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="service-title">Maintenance préventive</div>
+          <div class="service-desc">Programme de maintenance planifiée pour garantir la performance et la longévité de vos équipements sur le long terme.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Contrat annuel disponible
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <div class="service-title">Dépannage sur site</div>
+          <div class="service-desc">Intervention rapide de nos techniciens qualifiés en cas de panne ou dysfonctionnement — délai de réponse maîtrisé.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Intervention rapide
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M5 8a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v1a2 2 0 01-2 2M5 8v11a2 2 0 002 2h10a2 2 0 002-2V8M10 12h4"/></svg>
+          </div>
+          <div class="service-title">Approvisionnement réactifs</div>
+          <div class="service-desc">Stock réactifs et consommables maintenu — livraisons régulières programmées pour garantir la continuité de vos analyses.</div>
+          <div class="service-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Zéro rupture de stock
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FORMULAIRE + CONTACT ═══════════════════ -->
+  <section class="contact-section" id="demande">
+    <div class="container">
+      <div class="contact-inner">
+
+        <!-- Formulaire -->
+        <div class="form-wrap">
+          <div class="overline">Demande de support</div>
+          <h2 class="form-title">Soumettre une<br><em>demande.</em></h2>
+          <p class="form-subtitle">Décrivez votre problème ou besoin — notre équipe technique vous recontacte sous 24h ouvrées.</p>
+
+          <form>
+            <div class="form-row">
+              <div>
+                <label class="form-label">Nom complet</label>
+                <input type="text" class="form-input" placeholder="Dr. Ahmed Benali" />
+              </div>
+              <div>
+                <label class="form-label">Établissement</label>
+                <input type="text" class="form-input" placeholder="Laboratoire / Hôpital" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label class="form-label">Téléphone</label>
+                <input type="tel" class="form-input" placeholder="+212 6XX XXX XXX" />
+              </div>
+              <div>
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="contact@labo.ma" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Équipement concerné</label>
+              <select class="form-select">
+                <option value="" disabled selected>Sélectionner un équipement</option>
+                <optgroup label="Biochimie">
+                  <option>Biolis 30i</option>
+                  <option>Biolis i24 Premium</option>
+                  <option>Biolis i50 Superior</option>
+                </optgroup>
+                <optgroup label="Hématologie">
+                  <option>Celltac G</option>
+                  <option>Celltac F</option>
+                  <option>Celltac Es</option>
+                  <option>Celltac α</option>
+                </optgroup>
+                <optgroup label="Immunoanalyse">
+                  <option>Maglumi X8</option>
+                  <option>Biolumi CX8</option>
+                  <option>IDS-ISYS</option>
+                  <option>Blue Diver</option>
+                  <option>Alfa Reader</option>
+                  <option>CalproSmart</option>
+                </optgroup>
+                <optgroup label="Coagulation">
+                  <option>Coag 2D</option>
+                  <option>Coag 4D</option>
+                </optgroup>
+                <option>Autre équipement</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description du problème</label>
+              <textarea class="form-textarea" placeholder="Décrivez le dysfonctionnement, le message d'erreur affiché, ou la nature de votre demande..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Niveau d'urgence</label>
+              <div class="urgence-group">
+                <button type="button" class="urgence-btn selected-low">Faible</button>
+                <button type="button" class="urgence-btn selected-med">Modérée</button>
+                <button type="button" class="urgence-btn selected-high">Urgente — arrêt d'activité</button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Soumettre la demande
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Bloc contact -->
+        <div class="contact-aside">
+          <div class="contact-aside-title">Nous contacter directement</div>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-method-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-method-label">Téléphone</div>
+                <div class="contact-method-value">[À compléter]</div>
+                <div class="contact-method-sub">Lundi – Vendredi · 8h30 – 17h30</div>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+              </div>
+              <div>
+                <div class="contact-method-label">Email support</div>
+                <div class="contact-method-value">support@gigalab.ma</div>
+                <div class="contact-method-sub">Réponse sous 24h ouvrées</div>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-method-label">Siège GIGALAB</div>
+                <div class="contact-method-value">Casablanca, Maroc</div>
+                <div class="contact-method-sub">Adresse complète à compléter</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="supported-wrap">
+            <div class="supported-title">Équipements supportés</div>
+            <div class="supported-tags">
+              <span class="supported-tag">Biolis 30i</span>
+              <span class="supported-tag">Biolis i24</span>
+              <span class="supported-tag">Biolis i50</span>
+              <span class="supported-tag">Celltac G</span>
+              <span class="supported-tag">Celltac F</span>
+              <span class="supported-tag">Celltac Es</span>
+              <span class="supported-tag">Celltac α</span>
+              <span class="supported-tag">Maglumi X8</span>
+              <span class="supported-tag">Biolumi CX8</span>
+              <span class="supported-tag">IDS-ISYS</span>
+              <span class="supported-tag">Blue Diver</span>
+              <span class="supported-tag">Coag 2D</span>
+              <span class="supported-tag">Coag 4D</span>
+              <span class="supported-tag">Microscopes GI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROCESSUS D'INTERVENTION ═══════════════════ -->
+  <section class="process-section">
+    <div class="container">
+      <div class="process-header">
+        <div class="overline" style="justify-content:center;">Comment ça marche</div>
+        <h2>De la demande à la <em>résolution.</em></h2>
+        <p>Un processus clair et réactif — vous savez toujours où en est votre demande.</p>
+      </div>
+      <div class="process-steps-row">
+        <div class="process-step-col">
+          <div class="process-step-circle">01</div>
+          <div class="process-step-name">Soumission</div>
+          <div class="process-step-desc">Formulaire en ligne ou appel hotline — décrivez votre problème en 2 minutes</div>
+        </div>
+        <div class="process-step-col">
+          <div class="process-step-circle">02</div>
+          <div class="process-step-name">Qualification</div>
+          <div class="process-step-desc">Notre équipe technique analyse votre demande et évalue le niveau d'urgence</div>
+        </div>
+        <div class="process-step-col">
+          <div class="process-step-circle">03</div>
+          <div class="process-step-name">Prise en charge</div>
+          <div class="process-step-desc">Support à distance ou planification d'une intervention terrain selon la situation</div>
+        </div>
+        <div class="process-step-col">
+          <div class="process-step-circle">04</div>
+          <div class="process-step-name">Résolution</div>
+          <div class="process-step-desc">Confirmation de la résolution et compte-rendu d'intervention transmis au client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CTA ═══════════════════ -->
+  <section class="cta-section">
+    <div class="container cta-inner">
+      <div>
+        <span class="cta-overline">Besoin d'aide immédiate ?</span>
+        <h2 class="cta-title">Notre équipe<br>est disponible.</h2>
+        <p class="cta-sub">Lundi – Vendredi · 8h30 – 17h30 · Réponse email sous 24h ouvrées.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#demande" class="btn-cta-white">
+          Soumettre une demande
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M1 7h12M7 1l6 6-6 6"/></svg>
+        </a>
+        <a href="#" class="btn-cta-outline">Télécharger un manuel</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-logo">
+            <div class="footer-logo-mark"><span>G</span></div>
+            <span class="footer-logo-name">GIGALAB</span>
+          </div>
+          <p class="footer-tagline">We Move Behind Science. Fabrication locale et distribution multi-marques au service du diagnostic africain.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">in</a>
+            <a href="#" class="social-btn">fb</a>
+            <a href="#" class="social-btn">yt</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Solutions</div>
+          <nav class="footer-links">
+            <a href="gigalab_solutions.html">Tests Rapides GLD</a>
+            <a href="gigalab_solutions.html">Milieux de Culture</a>
+            <a href="gigalab_solutions.html">Microscopes</a>
+            <a href="gigalab_solutions.html">Automates &amp; Analyseurs</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-title">Entreprise</div>
+          <nav class="footer-links">
+            <a href="gigalab_about.html">À propos</a>
+            <a href="gigalab_manufacturing.html">Manufacturing</a>
+            <a href="gigalab_distribution.html">Distribution</a>
+            <a href="#">Carrière</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer-col-title">Ressources</div>
+          <nav class="footer-links">
+            <a href="#">Actualités</a>
+            <a href="#">Ressources techniques</a>
+            <a href="gigalab_support.html">Support</a>
+            <a href="#">Contact</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 GIGALAB Diagnostic. Tous droits réservés.</span>
+        <a href="https://www.xerusmedia.com" target="_blank" class="footer-xerus">Développé par <strong>Xerus</strong></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
