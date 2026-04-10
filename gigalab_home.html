@@ -80,18 +80,21 @@
       box-shadow: 0 6px 24px rgba(227,36,40,0.28);
     }
     .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 10px 32px rgba(227,36,40,0.38); }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--charcoal);
+      border: 2px solid var(--charcoal);
+    }
+    .btn-outline-dark:hover {
+      background: var(--charcoal);
+      color: var(--white);
+    }
     .btn-outline-white {
       background: transparent;
       color: rgba(255,255,255,0.75);
       border: 1.5px solid rgba(255,255,255,0.22);
     }
     .btn-outline-white:hover { background: rgba(255,255,255,0.08); color: var(--white); }
-    .btn-outline-dark {
-      background: transparent;
-      color: var(--charcoal);
-      border: 1.5px solid var(--gray-200);
-    }
-    .btn-outline-dark:hover { border-color: var(--charcoal); }
     .btn svg { width: 14px; height: 14px; transition: transform 0.2s ease; flex-shrink: 0; }
     .btn:hover svg { transform: translateX(3px); }
 
@@ -1201,20 +1204,17 @@
   <header class="navbar">
     <div class="container">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-mark"><span>G</span></div>
-        <div>
-          <div class="nav-logo-name">GIGALAB</div>
-          <span class="nav-logo-sub">Diagnostic</span>
-        </div>
+        <img src="jigajiga.png" alt="GIGALAB Logo" style="height: 34px; width: auto;">
       </a>
       <nav>
         <ul class="nav-links">
-          <li><a href="gigalab_home.html" class="active">Accueil</a></li>
           <li><a href="gigalab_about.html">À propos</a></li>
           <li><a href="gigalab_solutions.html">Solutions</a></li>
           <li><a href="gigalab_manufacturing.html">Manufacturing</a></li>
           <li><a href="gigalab_distribution.html">Distribution</a></li>
           <li><a href="gigalab_actualites.html">Actualités</a></li>
+          <li><a href="gigalab_ressources.html">Ressources</a></li>
+          <li><a href="gigalab_carriere.html">Carrière</a></li>
         </ul>
       </nav>
       <div class="nav-cta">
